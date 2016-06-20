@@ -107,7 +107,8 @@ class HookHandler(SocketServer.StreamRequestHandler):
             print("\nConnection closed\n", file=sys.stderr)
 
 def execute_and_flush(fn,data):
-    fn(data)
+    if data.get('skip')==False:
+        fn(data)
     sys.stdout.flush()
 
 def add_named_hook(obj, hook, name):
